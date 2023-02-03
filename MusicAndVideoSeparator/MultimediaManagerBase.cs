@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace MusicAndVideoSeparator
 {
-    public class FIleManagerBase
+    public class MultimediaManagerBase
     {
         protected List<string> DirectoriesToBeProcessed = new List<string>();
         protected List<string> ExtensionsList = new List<string>();
         protected string WorkingDirectory;
-        protected string VideoDestinationPrefix = @"D:\Memories\Videos\";
+        protected string VideoDestinationPrefix;
 
         public List<string> GetAllDirectoriesWithHeirarchy(string parentDirectory)
         {

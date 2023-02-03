@@ -5,35 +5,43 @@ using System.Linq;
 
 namespace MusicAndVideoSeparator
 {
-    public class MultimediaManager : FIleManagerBase
+    public class MultimediaManager : MultimediaManagerBase
     {
         private readonly string[] videoFormats = { "mp4", "3gp", "AVI", "VOB", "mkv", "MP4", "MOV" };
         private readonly string[] imageFormats = { "jpg", "JPG", "jpeg", "png" };
 
-        public MultimediaManager(string workingDirectory)
+        public MultimediaManager(string workingDirectory, string videoDestinationPrefix)
         {
+            VideoDestinationPrefix = videoDestinationPrefix;
             DirectoriesToBeProcessed.Add(workingDirectory);
             GetAllDirectoriesWithHeirarchy(workingDirectory);
         }
 
         public void WorkWithMultimediaFiles()
         {
+            int filesCount = 0;
             foreach (string directory in DirectoriesToBeProcessed)
             {
-                foreach (string file in Directory.GetFiles(directory))
+                var files = Directory.GetFiles(directory);
+                if (files.Length == 0)
+                {
+                    Console.WriteLine(directory);
+                }
+                foreach (string file in files)
                 {
                     //var extension = file.Split(".").Last();
                     //PopulateExtensionsList(extension);
                     //RenameVideosToMp4(file, extension);
                     //RenameImagesToJpg(file, extension);
                     //RenameImagesToMp4(file, extension);   works only with one directory having all jpg file names which are to be converted to mp4
-                    if (file.EndsWith(".mp4"))
-                    {
-                        MoveVideos(file);
-                    }
+                    //if (file.EndsWith(".mp4") || file.EndsWith(".3gp"))
+                    //{
+                    //    MoveVideos(file);
+                    //}
+                    //filesCount++;
                 }
             }
-
+            Console.WriteLine("Files Count: {0}", filesCount);
             //Console.WriteLine(string.Join(",", ExtensionsList));
         }
 

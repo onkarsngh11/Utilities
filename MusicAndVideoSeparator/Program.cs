@@ -8,8 +8,9 @@ namespace MusicAndVideoSeparator
     {
         static void Main(string[] args)
         {
-            string WorkingDirectory = @"D:\Memories\Images\";
-            MultimediaManager multimediaManager = new MultimediaManager(WorkingDirectory);
+            string workingDirectory = @"D:\Memories\Images\";       //22421  4610
+            string videoDestinationPrefix = @"D:\Memories\Videos\";
+            MultimediaManager multimediaManager = new MultimediaManager(workingDirectory, videoDestinationPrefix);
             //videosManager.PopulateExtensionsList(WorkingDirectory);
             multimediaManager.WorkWithMultimediaFiles();
             //videosManager.FixJpgFileNameToMp4BasedOnSize();
