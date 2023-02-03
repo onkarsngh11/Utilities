@@ -12,7 +12,6 @@ namespace MusicAndVideoSeparator
         protected string WorkingDirectory;
         protected string VideoDestinationPrefix = @"D:\Memories\Videos\";
 
-
         public List<string> GetAllDirectoriesWithHeirarchy(string parentDirectory)
         {
             var directories = Directory.EnumerateDirectories(parentDirectory).ToList();
@@ -31,12 +30,6 @@ namespace MusicAndVideoSeparator
             {
                 return new List<string>();
             }
-        }
-
-        public void PopulateExtensionsList(string extension)
-        {
-            if (!ExtensionsList.Contains(extension))// && videoFormats.Contains(extension))
-                ExtensionsList.Add(extension);
         }
     }
 }

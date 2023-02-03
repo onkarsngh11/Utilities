@@ -8,12 +8,11 @@ namespace MusicAndVideoSeparator
     {
         static void Main(string[] args)
         {
-            string WorkingDirectory = @"D:\Memories\Images\1 Onkar wed\3 Sagan\mp4";
-            FileManager videosManager = new FileManager(WorkingDirectory);
+            string WorkingDirectory = @"D:\Memories\Images\";
+            MultimediaManager multimediaManager = new MultimediaManager(WorkingDirectory);
             //videosManager.PopulateExtensionsList(WorkingDirectory);
-            //videosManager.MoveVideos();
+            multimediaManager.WorkWithMultimediaFiles();
             //videosManager.FixJpgFileNameToMp4BasedOnSize();
-            videosManager.RenameImagesToMp4();
         }
     }
 }

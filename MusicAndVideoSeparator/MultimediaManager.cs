@@ -5,36 +5,45 @@ using System.Linq;
 
 namespace MusicAndVideoSeparator
 {
-    public class FileManager : FIleManagerBase
+    public class MultimediaManager : FIleManagerBase
     {
         private readonly string[] videoFormats = { "mp4", "3gp", "AVI", "VOB", "mkv", "MP4", "MOV" };
         private readonly string[] imageFormats = { "jpg", "JPG", "jpeg", "png" };
-        public FileManager(string workingDirectory)
+
+        public MultimediaManager(string workingDirectory)
         {
             DirectoriesToBeProcessed.Add(workingDirectory);
             GetAllDirectoriesWithHeirarchy(workingDirectory);
         }
 
-        public void MoveVideos()
+        public void WorkWithMultimediaFiles()
         {
             foreach (string directory in DirectoriesToBeProcessed)
             {
                 foreach (string file in Directory.GetFiles(directory))
                 {
-                    var extension = file.Split(".").Last();
-
+                    //var extension = file.Split(".").Last();
                     //PopulateExtensionsList(extension);
-
-                    //RenameVideosToMp4(file, directory, extension);
-                    //RenameImagesToJpg(file, directory, extension);
-
-                    if (file.EndsWith(".mp4") || file.EndsWith(".3gp"))
+                    //RenameVideosToMp4(file, extension);
+                    //RenameImagesToJpg(file, extension);
+                    //RenameImagesToMp4(file, extension);   works only with one directory having all jpg file names which are to be converted to mp4
+                    if (file.EndsWith(".mp4"))
                     {
-                        //MoveVideos(file, videoDestinationPrefix);
+                        MoveVideos(file);
                     }
                 }
             }
-            Console.WriteLine(string.Join(",", ExtensionsList));
+
+            //Console.WriteLine(string.Join(",", ExtensionsList));
+        }
+
+        public void MoveVideos(string item)
+        {
+            var items = item.Split("\\");
+            var filePath = string.Join('\\', items, 3, items.Length - 3);
+            var directoryPath = string.Join('\\', items, 3, items.Length - 4);
+            Directory.CreateDirectory(VideoDestinationPrefix + directoryPath);
+            File.Move(item, VideoDestinationPrefix + filePath);
         }
 
         public void FixJpgFileNameToMp4()
@@ -68,16 +77,13 @@ namespace MusicAndVideoSeparator
             }
         }
 
-        public void MoveVideos(string item, string videoDestinationPrefix)
+        public void PopulateExtensionsList(string extension)
         {
-            var items = item.Split("/");
-            var formpath = string.Join('/', items, 2, items.Length - 3);
-
-            Directory.CreateDirectory(videoDestinationPrefix + formpath);
-            File.Move(item, videoDestinationPrefix + item.Substring(10, item.Length - 10));
+            if (!ExtensionsList.Contains(extension))// && videoFormats.Contains(extension))
+                ExtensionsList.Add(extension);
         }
 
-        public void RenameVideosToMp4(string file, string directory, string extension)
+        public void RenameVideosToMp4(string file, string extension)
         {
             if (videoFormats.Contains(extension) && extension != "mp4")
             {
@@ -88,7 +94,7 @@ namespace MusicAndVideoSeparator
             }
         }
 
-        public void RenameImagesToJpg(string file, string directory, string extension)
+        public void RenameImagesToJpg(string file, string extension)
         {
             if (imageFormats.Contains(extension) && extension != "jpg")
             {
@@ -99,18 +105,12 @@ namespace MusicAndVideoSeparator
             }
         }
 
-        internal void RenameImagesToMp4()
+        public void RenameImagesToMp4(string file)
         {
-            foreach (string directory in DirectoriesToBeProcessed)
-            {
-                foreach (string file in Directory.GetFiles(directory))
-                {
-                    var split = file.Split(".");
-                    var formFilePath = string.Join(".", split.Take(split.Count() - 1)) + ".mp4";
+            var split = file.Split(".");
+            var formFilePath = string.Join(".", split.Take(split.Count() - 1)) + ".mp4";
 
-                    File.Move(file, formFilePath);
-                }
-            }
+            File.Move(file, formFilePath);
         }
     }
 }
