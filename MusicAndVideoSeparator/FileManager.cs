@@ -7,8 +7,8 @@ namespace MusicAndVideoSeparator
 {
     public class FileManager : FIleManagerBase
     {
-        private string[] videoFormats = { "mp4", "3gp", "AVI", "VOB", "mkv", "MP4", "MOV" };
-        private string[] imageFormats = { "jpg", "JPG", "jpeg", "png" };
+        private readonly string[] videoFormats = { "mp4", "3gp", "AVI", "VOB", "mkv", "MP4", "MOV" };
+        private readonly string[] imageFormats = { "jpg", "JPG", "jpeg", "png" };
         public FileManager(string workingDirectory)
         {
             DirectoriesToBeProcessed.Add(workingDirectory);

@@ -10,8 +10,7 @@ namespace MusicAndVideoSeparator
         {
             string WorkingDirectory = @"D:\Memories\Images\1 Onkar wed\3 Sagan\mp4";
             FileManager videosManager = new FileManager(WorkingDirectory);
-            //ImagesManager imagesManager = new ImagesManager();
-
+            //videosManager.PopulateExtensionsList(WorkingDirectory);
             //videosManager.MoveVideos();
             //videosManager.FixJpgFileNameToMp4BasedOnSize();
             videosManager.RenameImagesToMp4();
