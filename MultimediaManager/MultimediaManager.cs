@@ -7,11 +7,14 @@ namespace MultimediaManager
 {
     public class MultimediaManager : MultimediaManagerBase
     {
-        private readonly string[] videoFormats = { "mp4", "3gp", "AVI", "VOB", "mkv", "MP4", "MOV" };
-        private readonly string[] imageFormats = { "jpg", "JPG", "jpeg", "png" };
-
-        public MultimediaManager(string workingDirectory, string videoDestinationPrefix)
+        public MultimediaManager(
+            string workingDirectory,
+            string videoDestinationPrefix,
+            string[] imageFormats,
+            string[] videoFormats)
         {
+            ImageFormats = imageFormats;
+            VideoFormats = videoFormats;
             VideoDestinationPrefix = videoDestinationPrefix;
             DirectoriesToBeProcessed.Add(workingDirectory);
             GetAllDirectoriesWithHeirarchy(workingDirectory);
@@ -69,22 +72,24 @@ namespace MultimediaManager
 
         public void RenameVideosToMp4(string file, string extension)
         {
-            if (videoFormats.Contains(extension) && extension != "mp4")
+            if (VideoFormats.Contains(extension) && extension != "mp4")
             {
                 var split = file.Split(".");
                 var formFilePath = string.Join(".", split.Take(split.Count() - 1)) + ".mp4";
 
+                Console.WriteLine("From: " + file + "\nto: " + formFilePath);
                 File.Move(file, formFilePath);
             }
         }
 
         public void RenameImagesToJpg(string file, string extension)
         {
-            if (imageFormats.Contains(extension) && extension != "jpg")
+            if (ImageFormats.Contains(extension) && extension != "jpg")
             {
                 var split = file.Split(".");
                 var formFilePath = string.Join(".", split.Take(split.Count() - 1)) + ".jpg";
 
+                Console.WriteLine("From: " + file + "\nto: " + formFilePath);
                 File.Move(file, formFilePath);
             }
         }
@@ -94,13 +99,13 @@ namespace MultimediaManager
             var split = file.Split(".");
             var formFilePath = string.Join(".", split.Take(split.Count() - 1)) + ".mp4";
 
+            Console.WriteLine("From: " + file + "\nto: " + formFilePath);
             File.Move(file, formFilePath);
         }
 
-        internal void GetPhotosOrVieosNotInMemoriesButInGooglePhotosToBeMoved()
+        internal void GetListOfFiles(string file)
         {
-
-            throw new NotImplementedException();
+            ListOfFiles.Add(file);
         }
 
         internal void GetVideosNotInGooglePhotosButInMemoriesToBeBackedUp()

@@ -7,8 +7,11 @@ namespace MultimediaManager
     public class MultimediaManagerBase
     {
         public List<string> DirectoriesToBeProcessed { get; set; } = new List<string>();
+        public List<string> ListOfFiles { get; set; } = new List<string>();
         public List<string> ExtensionsList { get; set; } = new List<string>();
         public string VideoDestinationPrefix { get; set; }
+        public string[] ImageFormats { get; set; }
+        public string[] VideoFormats { get; set; }
 
         public List<string> GetAllDirectoriesWithHeirarchy(string parentDirectory)
         {
@@ -30,19 +33,7 @@ namespace MultimediaManager
             }
         }
 
-        public void DirectoriesIterationAndPerform(PopulateExtensionsList method)
-        {
-            foreach (string directory in DirectoriesToBeProcessed)
-            {
-                var files = Directory.GetFiles(directory);
-                foreach (string file in files)
-                {
-                    method();
-                }
-            }
-        }
-
-        public void DirectoriesIterationAndPerform(FunctionUsingExtension method)
+        public void IterateDrectoriesAnd(FunctionUsingExtension perform)
         {
             foreach (string directory in DirectoriesToBeProcessed)
             {
@@ -50,24 +41,24 @@ namespace MultimediaManager
                 foreach (string file in files)
                 {
                     var extension = file.Split(".").Last();
-                    method(extension);
+                    perform(extension);
                 }
             }
         }
 
-        public void DirectoriesIterationAndPerform(FunctionUsingFile method)
+        public void IterateDirectoriesAnd(FunctionUsingFile perform)
         {
             foreach (string directory in DirectoriesToBeProcessed)
             {
                 var files = Directory.GetFiles(directory);
                 foreach (string file in files)
                 {
-                    method(file);
+                    perform(file);
                 }
             }
         }
 
-        public void DirectoriesIterationAndPerform(FunctionUsingFileAndExtension method)
+        public void IterateDirectoriesAnd(FunctionUsingFileAndExtension perform)
         {
             foreach (string directory in DirectoriesToBeProcessed)
             {
@@ -75,7 +66,7 @@ namespace MultimediaManager
                 foreach (string file in files)
                 {
                     var extension = file.Split(".").Last();
-                    method(file, extension);
+                    perform(file, extension);
                 }
             }
         }
