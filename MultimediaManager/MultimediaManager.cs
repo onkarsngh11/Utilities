@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace MusicAndVideoSeparator
+namespace MultimediaManager
 {
     public class MultimediaManager : MultimediaManagerBase
     {
@@ -17,41 +17,17 @@ namespace MusicAndVideoSeparator
             GetAllDirectoriesWithHeirarchy(workingDirectory);
         }
 
-        public void WorkWithMultimediaFiles()
+        public void MoveVideos(string sourceFilePath)
         {
-            int filesCount = 0;
-            foreach (string directory in DirectoriesToBeProcessed)
+            if (sourceFilePath.EndsWith(".mp4") || sourceFilePath.EndsWith(".3gp"))
             {
-                var files = Directory.GetFiles(directory);
-                if (files.Length == 0)
-                {
-                    Console.WriteLine(directory);
-                }
-                foreach (string file in files)
-                {
-                    //var extension = file.Split(".").Last();
-                    //PopulateExtensionsList(extension);
-                    //RenameVideosToMp4(file, extension);
-                    //RenameImagesToJpg(file, extension);
-                    //RenameImagesToMp4(file, extension);   works only with one directory having all jpg file names which are to be converted to mp4
-                    //if (file.EndsWith(".mp4") || file.EndsWith(".3gp"))
-                    //{
-                    //    MoveVideos(file);
-                    //}
-                    //filesCount++;
-                }
-            }
-            Console.WriteLine("Files Count: {0}", filesCount);
-            //Console.WriteLine(string.Join(",", ExtensionsList));
-        }
+                var items = sourceFilePath.Split("\\");
+                var destinationFilePath = string.Join('\\', items, 3, items.Length - 3);
+                var destinationDirectoryPath = string.Join('\\', items, 3, items.Length - 4);
 
-        public void MoveVideos(string item)
-        {
-            var items = item.Split("\\");
-            var filePath = string.Join('\\', items, 3, items.Length - 3);
-            var directoryPath = string.Join('\\', items, 3, items.Length - 4);
-            Directory.CreateDirectory(VideoDestinationPrefix + directoryPath);
-            File.Move(item, VideoDestinationPrefix + filePath);
+                Directory.CreateDirectory(VideoDestinationPrefix + destinationDirectoryPath);
+                File.Move(sourceFilePath, VideoDestinationPrefix + destinationFilePath);
+            }
         }
 
         public void FixJpgFileNameToMp4()
@@ -119,6 +95,17 @@ namespace MusicAndVideoSeparator
             var formFilePath = string.Join(".", split.Take(split.Count() - 1)) + ".mp4";
 
             File.Move(file, formFilePath);
+        }
+
+        internal void GetPhotosOrVieosNotInMemoriesButInGooglePhotosToBeMoved()
+        {
+
+            throw new NotImplementedException();
+        }
+
+        internal void GetVideosNotInGooglePhotosButInMemoriesToBeBackedUp()
+        {
+            throw new NotImplementedException();
         }
     }
 }
