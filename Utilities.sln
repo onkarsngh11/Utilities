@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mp3TagEditor", "MP3TagEdito
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultimediaManager", "MultimediaManager\MultimediaManager.csproj", "{9C14577B-65BB-4D5C-B199-39C7DA0325BC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganizeByName", "OrganizeByDate\OrganizeByName.csproj", "{CCDAC13C-9675-4993-A68C-7E6F80C38639}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultimediaUtilities", "MultimediaUtilities\MultimediaUtilities.csproj", "{97393104-FED1-4188-848B-BD3813C63A30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{9C14577B-65BB-4D5C-B199-39C7DA0325BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C14577B-65BB-4D5C-B199-39C7DA0325BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C14577B-65BB-4D5C-B199-39C7DA0325BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCDAC13C-9675-4993-A68C-7E6F80C38639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCDAC13C-9675-4993-A68C-7E6F80C38639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCDAC13C-9675-4993-A68C-7E6F80C38639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCDAC13C-9675-4993-A68C-7E6F80C38639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97393104-FED1-4188-848B-BD3813C63A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97393104-FED1-4188-848B-BD3813C63A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97393104-FED1-4188-848B-BD3813C63A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97393104-FED1-4188-848B-BD3813C63A30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

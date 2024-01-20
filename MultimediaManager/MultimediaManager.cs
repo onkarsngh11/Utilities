@@ -107,6 +107,44 @@ namespace MultimediaManager
         {
             ListOfFiles.Add(file);
         }
+        internal void GetPhotosOrVieosNotInMemoriesButInGooglePhotosToBeMoved(string[] videoFormats, string[] imageFormats, string videoDestinationPrefix)
+        {
+            string firstWorkingDirectory = @"D:\Memories\google";
+            string secondWorkingDirectory = @"D:\Google Photos\";
+            MultimediaManager multimediaManager = new MultimediaManager(firstWorkingDirectory, videoDestinationPrefix, imageFormats, videoFormats);
+
+            MultimediaManager multimediaManager2 = new MultimediaManager(secondWorkingDirectory, videoDestinationPrefix, imageFormats, videoFormats);
+
+            var listOfFilesInMemories = new FunctionUsingFile(multimediaManager.GetListOfFiles);
+            multimediaManager.IterateDirectoriesAnd(listOfFilesInMemories);
+
+            var listOfFilesInGooglePhotos = new FunctionUsingFile(multimediaManager2.GetListOfFiles);
+            multimediaManager2.IterateDirectoriesAnd(listOfFilesInGooglePhotos);
+
+            var orderedlistOfFilesInGooglePhotos = multimediaManager2.ListOfFiles.OrderBy(f => f).ToList();
+            var orderedlistOfFilesInMemories = multimediaManager.ListOfFiles.OrderBy(f => f).ToList();
+            var filesNotInMemories = new List<string>();
+
+            foreach (var file in orderedlistOfFilesInGooglePhotos)
+            {
+                var filenameafterlastslash = file.Split('\\').Last();
+                var filenameSplit = filenameafterlastslash.Split('.');
+                var filename = string.Join('.', filenameSplit.Take(filenameSplit.Count() - 1));
+
+                if (!orderedlistOfFilesInMemories.Any(f => f.Contains(filename)))
+                {
+                    filesNotInMemories.Add(file);
+                }
+            }
+
+            Console.WriteLine(string.Join("\n", filesNotInMemories));
+            foreach (var item in filesNotInMemories)
+            {
+                var destinationFileName = item.Split("\\").Last();
+
+                File.Copy(item, @"D:\Memories\google\" + destinationFileName);
+            }
+        }
 
         internal void GetVideosNotInGooglePhotosButInMemoriesToBeBackedUp()
         {
