@@ -1,0 +1,148 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Organize Memories",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}\\MultimediaUtilities.csproj",
+        "--",
+        "organize",
+        "${input:sourceDir}",
+        "D:\\Memories\\Organized",
+        "D:\\Memories\\UnOrganized"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Organize Memories (Dry Run)",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}\\MultimediaUtilities.csproj",
+        "--",
+        "organize",
+        "${input:sourceDir}",
+        "D:\\Memories\\Organized",
+        "D:\\Memories\\UnOrganized",
+        "--dry-run"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Find & Delete Duplicates (Dry Run)",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}\\MultimediaUtilities.csproj",
+        "--",
+        "deduplicate",
+        "D:\\Memories\\Organized",
+        "D:\\Memories\\UnOrganized",
+        "--dry-run"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Find & Delete Duplicates",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}\\MultimediaUtilities.csproj",
+        "--",
+        "deduplicate",
+        "D:\\Memories\\Organized",
+        "D:\\Memories\\UnOrganized"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Delete Empty Directories (Dry Run)",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}\\MultimediaUtilities.csproj",
+        "--",
+        "delete-empty",
+        "${input:deleteEmptyDir}",
+        "--dry-run"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Delete Empty Directories",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}\\MultimediaUtilities.csproj",
+        "--",
+        "delete-empty",
+        "${input:deleteEmptyDir}"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": false
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "sourceDir",
+      "type": "promptString",
+      "description": "Source directory to organize (press Enter for default)",
+      "default": "D:\\Memories\\dump"
+    },
+    {
+      "id": "deleteEmptyDir",
+      "type": "promptString",
+      "description": "Target directory to clean empty subdirectories from (press Enter for default)",
+      "default": "D:\\Memories"
+    }
+  ]
+}
